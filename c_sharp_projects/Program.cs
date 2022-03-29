@@ -38,11 +38,14 @@ namespace c_sharp_projects
             // obj.GuessWhat();
 
 
-            // Console.WriteLine(GetPow(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine())));
+            Console.WriteLine(GetPow(Convert.ToInt32(Console.ReadLine()), Convert.ToInt32(Console.ReadLine())));
 
-            NewClass obj = new NewClass();
+            Book obj = new Book("Nameless","John Doe", 12.65, "test");
 
-            obj.TryCatch();
+            Console.WriteLine(obj.ToString());
+
+            // Book.TryCatch();
+
 
             Console.ReadLine();
         }
@@ -59,10 +62,39 @@ namespace c_sharp_projects
         }
     }
 
-    class NewClass
+    class Book
     {
-        public NewClass() { }
-        public void GuessWhat()
+        public string title;
+        public string author;
+        public double price;
+        private string rating;
+
+        public Book() { }
+
+        public Book(string title, string author, double price, string rating) {
+            this.title = title;
+            this.author = author;
+            this.price = price;
+            Rating = rating;
+        }
+
+        public string Rating
+        {
+            get { return rating; }
+
+            set
+            {
+                if(value == "G" || value == "PG" || value == "PG-13" || value == "G" || value == "NR")
+                {
+                    rating = value;
+                }
+                else
+                {
+                    rating = "NR";
+                }
+            }
+        }
+        public virtual void GuessWhat()
         {
             string scrtWord = "giraffe";
             string que = "Guess the word: ";
@@ -89,7 +121,7 @@ namespace c_sharp_projects
             }
         }
 
-        public void TryCatch()
+        static public void TryCatch()
         {
             try
             {
@@ -100,6 +132,20 @@ namespace c_sharp_projects
                 Console.WriteLine(e.Message);
                 // throw;
             }
+        }
+
+        public  override string ToString()
+        
+        {
+            return title + " " + author + " " + rating + " " + price;
+        }
+    }
+
+    class HistoryBook: Book
+    {
+        public override void GuessWhat()
+        {
+            base.GuessWhat();
         }
     }
 
